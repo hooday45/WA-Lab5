@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="techStoreApp">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../css/styles.css">
+        <title>Product Catalog</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+        <script src="../js/app.js"></script>
+    </head>
+
+    <body ng-controller="ProductController">
+        <div class="banner">Welcome to the Tech Wizard Store!</div>
+
+        <div class="product-container">
+            <div class="product" ng-repeat="product in products">
+                <h2>{{ product.name }}</h2>
+                <img ng-src="../img/{{ product.image }}" alt="{{ product.name }}">
+                <p>Price: ${{ product.price }}</p>
+                <button ng-click="addToCart(product)">Add to Cart</button>
+            </div>
+        </div>
+
+        <div class="cart" ng-click="toggleCartVisibility()">
+            🛒 My Cart
+        </div>
+
+        <div id="cart-items" class="cart-items" ng-class="{ hidden: !cartVisible }">
+            <h3>Cart</h3>
+            <ul>
+                <li ng-repeat="item in cartItems">
+                    {{ item.name }} - ${{ item.price }}
+                    <button ng-click="removeFromCart(item)">Remove</button>
+                </li>
+            </ul>
+            <h4>Total: ${{ getTotal() }}</h4>
+        </div>
+    </body>
+</html>
